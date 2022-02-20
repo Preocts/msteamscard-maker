@@ -22,6 +22,11 @@ def test_render(textblock: TextBlock) -> None:
     assert textblock.render == '{"type": "TextBlock", "text": "", "fallback": "drop"}'
 
 
+def test_set_text(textblock: TextBlock) -> None:
+    textblock.set_text("This is a test")
+    assert textblock.text == "This is a test"
+
+
 @pytest.mark.parametrize(
     ("attr", "value", "expected"),
     (

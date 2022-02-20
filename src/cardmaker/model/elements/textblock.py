@@ -23,6 +23,14 @@ from cardmaker.model.constants import WEIGHT
 
 @dataclasses.dataclass
 class TextBlock:
+    """
+    Defines a TextBlock Card Element used inside `content.body[]`
+
+    Attributes can be set directly or use `set_[attrname]()` methods to
+    ensure values are valid. All `None` assigned attributes are excluded
+    from final `.render()` of model.
+    """
+
     type: str = "TextBlock"
     text: str = ""
     color: str | None = None
@@ -49,6 +57,10 @@ class TextBlock:
     @property
     def render(self) -> str:
         return str(self)
+
+    def set_text(self, text: str) -> None:
+        """Text to display. A subset of markdown is supported"""
+        self.text = text
 
     def set_color(self, color: T_COLORS | None) -> None:
         """
