@@ -76,17 +76,17 @@ class TextBlock:
             getattr(self, f"set_{key}")(value)
 
     def __repr__(self) -> str:
-        # Remove all None values
-        cleaned = {k: v for k, v in dataclasses.asdict(self).items() if v is not None}
-        return json.dumps(cleaned)
+        return json.dumps(self.asdict)
 
     @property
     def render(self) -> str:
+        """Render object as serialized string. All None values are removed"""
         return str(self)
 
     @property
     def asdict(self) -> dict[str, Any]:
-        return dataclasses.asdict(self)
+        """All None values are removed from output"""
+        return {k: v for k, v in dataclasses.asdict(self).items() if v is not None}
 
     def set_text(self, text: str) -> None:
         """Text to display. A subset of markdown is supported"""

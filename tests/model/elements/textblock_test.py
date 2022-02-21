@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import dataclasses
-
 import pytest
 from cardmaker.model.elements.textblock import TextBlock
 
@@ -25,7 +23,8 @@ def test_render(textblock: TextBlock) -> None:
 
 
 def test_asdict(textblock: TextBlock) -> None:
-    assert textblock.asdict == dataclasses.asdict(textblock)
+    expected = {"type": "TextBlock", "text": "", "fallback": "drop"}
+    assert textblock.asdict == expected
 
 
 def test_set_text(textblock: TextBlock) -> None:
