@@ -1,5 +1,24 @@
 from typing import Literal
 
+EMPTY_WEBHOOK_CARD = {
+    "type": "message",
+    "attachments": [
+        {
+            "contentType": "application/vnd.microsoft.card.adaptive",
+            "content": {
+                "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
+                "version": "1.0",
+                "type": "AdaptiveCard",
+                "body": [],
+                "actions": [],
+                "msteams": {
+                    "entities": [],
+                },
+            },
+        }
+    ],
+}
+
 T_COLORS = Literal[
     "default",
     "dark",
