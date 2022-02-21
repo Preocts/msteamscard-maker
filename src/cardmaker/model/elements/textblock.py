@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import dataclasses
 import json
+from typing import Any
 
 from cardmaker.model.constants import COLORS
 from cardmaker.model.constants import FONTSIZE
@@ -82,6 +83,10 @@ class TextBlock:
     @property
     def render(self) -> str:
         return str(self)
+
+    @property
+    def asdict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)
 
     def set_text(self, text: str) -> None:
         """Text to display. A subset of markdown is supported"""
