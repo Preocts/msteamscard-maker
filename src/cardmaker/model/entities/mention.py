@@ -28,6 +28,14 @@ class Mention:
     type: str = "mention"
 
     def __repr__(self) -> str:
+        return json.dumps(self.asdict)
+
+    @property
+    def render(self) -> str:
+        return str(self)
+
+    @property
+    def asdict(self) -> dict[str, Any]:
         obj = {
             "type": self.type,
             "text": self.text,
@@ -36,12 +44,4 @@ class Mention:
                 "name": self.name,
             },
         }
-        return json.dumps(obj)
-
-    @property
-    def render(self) -> str:
-        return str(self)
-
-    @property
-    def asdict(self) -> dict[str, Any]:
-        return dataclasses.asdict(self)
+        return obj
