@@ -1,8 +1,11 @@
 """
 https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/cards/cards-format?tabs=adaptive-md%2Cconnector-html#mention-support-within-adaptive-cards
 """
+from __future__ import annotations
+
 import dataclasses
 import json
+from typing import Any
 
 
 @dataclasses.dataclass
@@ -38,3 +41,7 @@ class Mention:
     @property
     def render(self) -> str:
         return str(self)
+
+    @property
+    def asdict(self) -> dict[str, Any]:
+        return dataclasses.asdict(self)

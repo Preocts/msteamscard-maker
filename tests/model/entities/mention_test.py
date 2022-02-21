@@ -1,3 +1,4 @@
+import dataclasses
 import json
 
 from cardmaker.model.entities.mention import Mention
@@ -34,3 +35,8 @@ def test_render() -> None:
 def test_repr() -> None:
     result = Mention(**TEST_DATA)
     assert str(result) == json.dumps(EXPECTED)
+
+
+def test_asdict() -> None:
+    result = Mention(**TEST_DATA)
+    assert result.asdict == dataclasses.asdict(result)
