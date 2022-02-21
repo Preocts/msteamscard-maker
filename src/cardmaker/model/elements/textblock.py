@@ -21,14 +21,33 @@ from cardmaker.model.constants import T_WEIGHT
 from cardmaker.model.constants import WEIGHT
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(init=False)
 class TextBlock:
     """
     Defines a TextBlock Card Element used inside `content.body[]`
 
-    Attributes can be set directly or use `set_[attrname]()` methods to
-    ensure values are valid. All `None` assigned attributes are excluded
-    from final `.render()` of model.
+    Attributes can be set with keyword arguments, directly thought assigment
+    or use `set_[attrname]()` methods. All `None` assigned attributes are
+    excluded from final `.render()` of model.
+
+    Invalid values will default to `None` when set through keywords or setters.
+
+    Keyword Arguments:
+        text: [str] Text to display. A subset of markdown is supported
+        color: [str] Controls the color of TextBlock elements.
+        fontType: [str] Type of font to use for rendering
+        horizontalAlignment: [str] Controls the horizontal text alignment
+        isSubtle: [bool] If true displays text slightly toned down
+        maxLines: [int] Specify the maximum number of lines to display
+        size: [str] Control size of text
+        weight: [str] Controls the weight of TextBlock elements
+        wrap: [bool] If true, allow text to wrap. Otherwise text is clipped
+        style: [str] The style of this TextBlock for accessibility purposes
+        height: [str] Specify the height of the element
+        separator: [bool] When True, draw a sparating line at the top of the element
+        spacing: [str] Controls spacing between this element and the preceding element
+        id: [str] A unique indentifier associated with the item
+        idVisible: [bool] If False, this item will be removed from the visual tree
     """
 
     type: str = "TextBlock"
@@ -48,6 +67,12 @@ class TextBlock:
     id: str | None = None
     isVisible: bool | None = None
     fallback: str = "drop"
+
+    def __init__(self, **kwargs: str | int | bool | None) -> None:
+        for key, value in kwargs.items():
+            if not hasattr(self, f"set_{key}"):
+                raise KeyError(f"Invalid keyword arguement: '{key}'")
+            getattr(self, f"set_{key}")(value)
 
     def __repr__(self) -> str:
         # Remove all None values
@@ -94,14 +119,14 @@ class TextBlock:
         self.isSubtle = bool(flag) if flag is not None else None
 
     def set_maxLines(self, lines: int | None) -> None:
-        """Specify the maximum number of lines to display."""
+        """Specify the maximum number of lines to display"""
         if not isinstance(lines, int) or lines < 1:
             lines = None
         self.maxLines = lines
 
     def set_size(self, fontsize: T_FONTSIZE | None) -> None:
         """
-        Control size of text.
+        Control size of text
             `default`, `small`, `medium`, `large`, `extraLarge`
         """
         if fontsize is not None and fontsize not in FONTSIZE:
@@ -110,7 +135,7 @@ class TextBlock:
 
     def set_weight(self, weight: T_WEIGHT | None) -> None:
         """
-        Controls the weight of TextBlock elements.
+        Controls the weight of TextBlock elements
             `default`, `lighter`, `bolder`
         """
         if weight is not None and weight not in WEIGHT:
@@ -123,7 +148,7 @@ class TextBlock:
 
     def set_style(self, style: T_STYLE | None) -> None:
         """
-        The style of this TextBlock for accessibility purposes.
+        The style of this TextBlock for accessibility purposes
             `default`, `heading`
         """
         if style is not None and style not in STYLE:
@@ -132,7 +157,7 @@ class TextBlock:
 
     def set_height(self, height: T_HEIGHT | None) -> None:
         """
-        Specify the height of the element.
+        Specify the height of the element
             `auto`, `stretch`
         """
         if height is not None and height not in HEIGHT:
@@ -145,7 +170,7 @@ class TextBlock:
 
     def set_spacing(self, spacing: T_SPACING | None) -> None:
         """
-        Controls the amount of spacing between this element and the preceding element.
+        Controls the amount of spacing between this element and the preceding element
             'default', 'none', 'small', 'medium', 'large', 'extraLarge', 'padding'
         """
         if spacing is not None and spacing not in SPACING:
