@@ -28,7 +28,7 @@ def test_init_mention() -> None:
 
 def test_render() -> None:
     result = Mention(**TEST_DATA)
-    assert result.render == json.dumps(EXPECTED)
+    assert result.render() == json.dumps(EXPECTED)
 
 
 def test_repr() -> None:
@@ -38,4 +38,4 @@ def test_repr() -> None:
 
 def test_asdict() -> None:
     result = Mention(**TEST_DATA)
-    assert result.asdict == EXPECTED
+    assert result.asdict() == EXPECTED

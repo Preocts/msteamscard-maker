@@ -23,7 +23,7 @@ class WebhookCard:
 
         for entity in self.entities:
             card["attachments"][0]["content"]["msteams"]["entities"].append(
-                entity.asdict
+                entity.asdict()
             )
         return json.dumps(card)
 

@@ -28,14 +28,14 @@ class Mention:
     type: str = "mention"
 
     def __repr__(self) -> str:
-        return json.dumps(self.asdict)
+        return json.dumps(self.asdict())
 
-    @property
-    def render(self) -> str:
-        return str(self)
+    def render(self, indent: int | None = None) -> str:
+        """Render object as serialized string."""
+        return json.dumps(self.asdict(), indent=indent)
 
-    @property
     def asdict(self) -> dict[str, Any]:
+        """Render object as dict."""
         obj = {
             "type": self.type,
             "text": self.text,
