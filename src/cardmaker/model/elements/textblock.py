@@ -76,14 +76,12 @@ class TextBlock:
             getattr(self, f"set_{key}")(value)
 
     def __repr__(self) -> str:
-        return json.dumps(self.asdict)
+        return json.dumps(self.asdict())
 
-    @property
-    def render(self) -> str:
+    def render(self, indent: int | None = None) -> str:
         """Render object as serialized string. All None values are removed"""
-        return str(self)
+        return json.dumps(self.asdict(), indent=indent)
 
-    @property
     def asdict(self) -> dict[str, Any]:
         """All None values are removed from output"""
         return {k: v for k, v in dataclasses.asdict(self).items() if v is not None}

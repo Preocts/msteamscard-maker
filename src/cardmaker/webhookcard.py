@@ -19,7 +19,7 @@ class WebhookCard:
     def __repr__(self) -> str:
         card = json.loads(self._empty_card)
         for element in self.body:
-            card["attachments"][0]["content"]["body"].append(element.asdict)
+            card["attachments"][0]["content"]["body"].append(element.asdict())
 
         for entity in self.entities:
             card["attachments"][0]["content"]["msteams"]["entities"].append(

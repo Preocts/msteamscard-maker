@@ -19,12 +19,12 @@ def test_repl(textblock: TextBlock) -> None:
 
 
 def test_render(textblock: TextBlock) -> None:
-    assert textblock.render == '{"type": "TextBlock", "text": "", "fallback": "drop"}'
+    assert textblock.render() == '{"type": "TextBlock", "text": "", "fallback": "drop"}'
 
 
 def test_asdict(textblock: TextBlock) -> None:
     expected = {"type": "TextBlock", "text": "", "fallback": "drop"}
-    assert textblock.asdict == expected
+    assert textblock.asdict() == expected
 
 
 def test_set_text(textblock: TextBlock) -> None:
