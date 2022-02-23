@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import json
+from typing import Union
 
 from cardmaker.model.constants import EMPTY_WEBHOOK_CARD
+from cardmaker.model.elements.factset import FactSet
 from cardmaker.model.elements.textblock import TextBlock
 from cardmaker.model.entities.mention import Mention
 
-T_ELEMENTS = TextBlock
+T_ELEMENTS = Union[TextBlock, FactSet]
 T_ENTITIES = Mention
 
 

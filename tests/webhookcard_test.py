@@ -3,6 +3,7 @@ from pathlib import Path
 
 import pytest
 from cardmaker.model.constants import EMPTY_WEBHOOK_CARD
+from cardmaker.model.elements.factset import FactSet
 from cardmaker.model.elements.textblock import TextBlock
 from cardmaker.model.entities.mention import Mention
 from cardmaker.webhookcard import WebhookCard
@@ -14,6 +15,7 @@ TEST_TEXTBLOCK = TextBlock(
     size="large",
 )
 TEST_MENTION = Mention("<at>General Kenobi</at>", "24601", "Obiwan")
+TEST_FACTSET = FactSet([("fact 1", "value 1"), ("fact 2", "value 2")])
 
 
 @pytest.fixture
@@ -25,6 +27,7 @@ def hookcard() -> WebhookCard:
 def test_card_creation(hookcard: WebhookCard) -> None:
     hookcard.add_element(TEST_TEXTBLOCK)
     hookcard.add_mention(TEST_MENTION)
+    hookcard.add_element(TEST_FACTSET)
 
     assert hookcard.render == json.dumps(EXPECTED_TEST_CARD)
 
