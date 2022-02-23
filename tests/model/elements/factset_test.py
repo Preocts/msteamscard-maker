@@ -71,10 +71,8 @@ def test_add_facts() -> None:
     assert len(facts.facts) == 4
 
 
-def test_render_with_facts() -> None:
-    facts = FactSet()
-    for fact in FACTS:
-        facts.add_fact(*fact)
+def test_render_with_facts_by_init() -> None:
+    facts = FactSet(FACTS)
 
     assert facts.render() == json.dumps(EXPECTED)
 

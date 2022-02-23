@@ -11,10 +11,21 @@ class _Fact(TypedDict):
     value: str
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(init=False)
 class FactSet:
     type: str = "FactSet"
     facts: list[_Fact] = dataclasses.field(default_factory=list)
+
+    def __init__(self, facts_: list[tuple[str, str]] | None = None) -> None:
+        """
+        Define a FactSet, Facts are rendered in the order added
+
+        Args:
+            facts: Iterable (title:value) collection of facts.
+        """
+        self.facts: list[_Fact] = []
+        for fact in facts_ or []:
+            self.add_fact(*fact)
 
     def __repr__(self) -> str:
         return json.dumps(dataclasses.asdict(self))
