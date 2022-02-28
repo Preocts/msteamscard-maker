@@ -16,6 +16,10 @@
                         "fallback": "drop"
                     },
                     {
+                        "type": "Image",
+                        "url": "https://127.0.0.1"
+                    },
+                    {
                         "type": "FactSet",
                         "facts": [
                             {
