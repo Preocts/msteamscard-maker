@@ -49,7 +49,6 @@ FONTTYPES = [
     "monospace",
 ]
 
-
 T_HORIZONTALALIGNMENT = Literal[
     "left",
     "center",
@@ -99,6 +98,16 @@ STYLE = [
     "heading",
 ]
 
+T_IMAGE_STYLE = Literal[
+    "default",
+    "person",
+]
+
+IMAGE_STYLE = [
+    "default",
+    "person",
+]
+
 T_HEIGHT = Literal[
     "auto",
     "stretch",
@@ -127,4 +136,20 @@ SPACING = [
     "large",
     "extraLarge",
     "padding",
+]
+
+T_SIZE = Literal[
+    "auto",
+    "stretch",
+    "small",
+    "medium",
+    "large",
+]
+
+SIZE = [
+    "auto",
+    "stretch",
+    "small",
+    "medium",
+    "large",
 ]
