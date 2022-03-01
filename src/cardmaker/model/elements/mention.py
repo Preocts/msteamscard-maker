@@ -4,12 +4,13 @@ https://docs.microsoft.com/en-us/microsoftteams/platform/task-modules-and-cards/
 from __future__ import annotations
 
 import dataclasses
-import json
 from typing import Any
 
+from cardmaker.model.base_element import BaseElement
 
-@dataclasses.dataclass
-class Mention:
+
+@dataclasses.dataclass(repr=False)
+class Mention(BaseElement):
     """
     Defines a mention object for Adaptive Card.
 
@@ -27,15 +28,9 @@ class Mention:
     name: str
     type: str = "mention"
 
-    def __repr__(self) -> str:
-        return json.dumps(self.asdict())
-
-    def render(self, indent: int | None = None) -> str:
-        """Render object as serialized string."""
-        return json.dumps(self.asdict(), indent=indent)
-
     def asdict(self) -> dict[str, Any]:
         """Render object as dict."""
+        # Overwrites base class to format object's specific implementation
         obj = {
             "type": self.type,
             "text": self.text,

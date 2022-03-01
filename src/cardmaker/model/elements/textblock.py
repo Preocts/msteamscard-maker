@@ -1,9 +1,8 @@
 from __future__ import annotations
 
 import dataclasses
-import json
-from typing import Any
 
+from cardmaker.model.base_element import BaseElement
 from cardmaker.model.constants import COLORS
 from cardmaker.model.constants import FONTSIZE
 from cardmaker.model.constants import FONTTYPES
@@ -22,8 +21,8 @@ from cardmaker.model.constants import T_WEIGHT
 from cardmaker.model.constants import WEIGHT
 
 
-@dataclasses.dataclass(init=False)
-class TextBlock:
+@dataclasses.dataclass(init=False, repr=False)
+class TextBlock(BaseElement):
     """
     Defines a TextBlock Card Element used inside `content.body[]`
 
@@ -48,7 +47,7 @@ class TextBlock:
         separator: [bool] When True, draw a sparating line at the top of the element
         spacing: [str] Controls spacing between this element and the preceding element
         id: [str] A unique indentifier associated with the item
-        idVisible: [bool] If False, this item will be removed from the visual tree
+        isVisible: [bool] If False, this item will be removed from the visual tree
     """
 
     type: str = "TextBlock"
@@ -74,17 +73,6 @@ class TextBlock:
             if not hasattr(self, f"set_{key}"):
                 raise KeyError(f"Invalid keyword arguement: '{key}'")
             getattr(self, f"set_{key}")(value)
-
-    def __repr__(self) -> str:
-        return json.dumps(self.asdict())
-
-    def render(self, indent: int | None = None) -> str:
-        """Render object as serialized string. All None values are removed"""
-        return json.dumps(self.asdict(), indent=indent)
-
-    def asdict(self) -> dict[str, Any]:
-        """All None values are removed from output"""
-        return {k: v for k, v in dataclasses.asdict(self).items() if v is not None}
 
     def set_text(self, text: str) -> None:
         """Text to display. A subset of markdown is supported"""

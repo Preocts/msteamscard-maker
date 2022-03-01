@@ -5,8 +5,8 @@ import pytest
 from cardmaker.model.constants import EMPTY_WEBHOOK_CARD
 from cardmaker.model.elements.factset import FactSet
 from cardmaker.model.elements.image import Image
+from cardmaker.model.elements.mention import Mention
 from cardmaker.model.elements.textblock import TextBlock
-from cardmaker.model.entities.mention import Mention
 from cardmaker.webhookcard import WebhookCard
 
 EXPECTED_TEST_CARD = json.load(Path("tests/fixtures/webhook_card.json").open())

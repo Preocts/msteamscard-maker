@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 import dataclasses
-import json
 import re
-from typing import Any
 
+from cardmaker.model.base_element import BaseElement
 from cardmaker.model.constants import HEIGHT
 from cardmaker.model.constants import HORIZONTALALIGNMENT
 from cardmaker.model.constants import IMAGE_STYLE
@@ -14,8 +13,8 @@ from cardmaker.model.constants import T_IMAGE_STYLE
 from cardmaker.model.constants import T_SIZE
 
 
-@dataclasses.dataclass(init=False)
-class Image:
+@dataclasses.dataclass(init=False, repr=False)
+class Image(BaseElement):
     type: str = "Image"
     url: str = ""
     altText: str | None = None
@@ -57,17 +56,6 @@ class Image:
             if not hasattr(self, f"set_{key}"):
                 raise KeyError(f"Invalid keyword arguement: '{key}'")
             getattr(self, f"set_{key}")(value)
-
-    def __repr__(self) -> str:
-        return json.dumps(self.asdict())
-
-    def render(self, indent: int | None = None) -> str:
-        """Render object as serialized string. All None values are removed"""
-        return json.dumps(self.asdict(), indent=indent)
-
-    def asdict(self) -> dict[str, Any]:
-        """All None values are removed from output"""
-        return {k: v for k, v in dataclasses.asdict(self).items() if v is not None}
 
     def set_altText(self, text: str | None) -> None:
         """Alternate text describing the image"""

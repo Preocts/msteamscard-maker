@@ -1,6 +1,6 @@
 import json
 
-from cardmaker.model.entities.mention import Mention
+from cardmaker.model.elements.mention import Mention
 
 TEST_DATA = {
     "text": "<at>General Kenobi</at>",

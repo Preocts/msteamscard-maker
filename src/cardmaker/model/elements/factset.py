@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import dataclasses
-import json
-from typing import Any
 from typing import TypedDict
+
+from cardmaker.model.base_element import BaseElement
 
 
 class _Fact(TypedDict):
@@ -11,8 +11,8 @@ class _Fact(TypedDict):
     value: str
 
 
-@dataclasses.dataclass(init=False)
-class FactSet:
+@dataclasses.dataclass(init=False, repr=False)
+class FactSet(BaseElement):
     type: str = "FactSet"
     facts: list[_Fact] = dataclasses.field(default_factory=list)
 
@@ -26,17 +26,6 @@ class FactSet:
         self.facts: list[_Fact] = []
         for fact in facts_ or []:
             self.add_fact(*fact)
-
-    def __repr__(self) -> str:
-        return json.dumps(dataclasses.asdict(self))
-
-    def render(self, indent: int | None = None) -> str:
-        """Render object as a string"""
-        return json.dumps(dataclasses.asdict(self), indent=indent)
-
-    def asdict(self) -> dict[str, Any]:
-        """Object as a dict"""
-        return dataclasses.asdict(self)
 
     def add_fact(self, title: str, value: str) -> None:
         """Add a fact to the FactSet. Facts are rendered in the order added"""
