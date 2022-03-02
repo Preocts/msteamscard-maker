@@ -25,6 +25,7 @@ class Media(BaseElement):
     poster: str | None = None
     altText: str | None = None
 
+    # TODO: Make this work with __init__ 02.03.2022
     @classmethod
     def basic_setup(
         cls,

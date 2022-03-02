@@ -18,13 +18,7 @@ def test_ensure_superclass() -> None:
     assert issubclass(Media, BaseElement)
 
 
-def test_empty_model_asdict() -> None:
-    media = Media()
-
-    assert media.asdict() == EXPECTED_EMPTY
-
-
-def test_full_model_asdict() -> None:
+def test_add_source_against_asdict_result() -> None:
     media = Media()
     with patch.dict(EXPECTED_EMPTY, {"sources": []}) as expected_full:
         for _ in range(10):

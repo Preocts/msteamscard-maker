@@ -14,19 +14,6 @@ def test_required_fields(textblock: TextBlock) -> None:
     assert textblock.text == ""
 
 
-def test_repl(textblock: TextBlock) -> None:
-    assert str(textblock) == '{"type": "TextBlock", "text": "", "fallback": "drop"}'
-
-
-def test_render(textblock: TextBlock) -> None:
-    assert textblock.render() == '{"type": "TextBlock", "text": "", "fallback": "drop"}'
-
-
-def test_asdict(textblock: TextBlock) -> None:
-    expected = {"type": "TextBlock", "text": "", "fallback": "drop"}
-    assert textblock.asdict() == expected
-
-
 def test_set_text(textblock: TextBlock) -> None:
     textblock.set_text("This is a test")
     assert textblock.text == "This is a test"

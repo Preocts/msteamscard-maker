@@ -39,21 +39,6 @@ def test_empty_object() -> None:
     assert result.facts == []
 
 
-def test_empty_repr() -> None:
-    result = FactSet()
-    assert str(result) == json.dumps(EXPECTED_EMPTY)
-
-
-def test_empty_asdict() -> None:
-    result = FactSet()
-    assert result.asdict() == EXPECTED_EMPTY
-
-
-def test_empty_render() -> None:
-    result = FactSet()
-    assert result.render() == json.dumps(EXPECTED_EMPTY)
-
-
 def test_add_fact_method() -> None:
     facts = FactSet()
     facts.add_fact("Fact 1", "Value 1")

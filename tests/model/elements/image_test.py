@@ -1,28 +1,12 @@
 from __future__ import annotations
 
-import json
-
 import pytest
 from cardmaker.model.elements.image import Image
-
-FIXTURE_IMAGE = {"type": "Image", "url": "https://127.0.0.1"}
 
 
 @pytest.fixture
 def image() -> Image:
     return Image("https://127.0.0.1")
-
-
-def test_repr_from_fixture(image: Image) -> None:
-    assert str(image) == json.dumps(FIXTURE_IMAGE)
-
-
-def test_asdict_from_fixture(image: Image) -> None:
-    assert image.asdict() == FIXTURE_IMAGE
-
-
-def test_render_from_fixture(image: Image) -> None:
-    assert image.render() == json.dumps(FIXTURE_IMAGE)
 
 
 def test_url_required() -> None:
