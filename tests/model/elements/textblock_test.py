@@ -6,7 +6,7 @@ from cardmaker.model.elements.textblock import TextBlock
 
 @pytest.fixture
 def textblock() -> TextBlock:
-    return TextBlock()
+    return TextBlock("")
 
 
 def test_required_fields(textblock: TextBlock) -> None:
@@ -80,7 +80,6 @@ def test_optional_setters(
 @pytest.mark.parametrize(
     ("attr", "value"),
     (
-        ("text", "Hello"),
         ("color", "dark"),
         ("fontType", "monospace"),
         ("horizontalAlignment", "right"),
@@ -98,10 +97,15 @@ def test_optional_setters(
 )
 def test_keyword_arguments(attr: str, value: str | bool | int) -> None:
     param = {attr: value}
-    result = TextBlock(**param)
+    result = TextBlock("", **param)
     assert getattr(result, attr) == value
+
+
+def test_text_positional() -> None:
+    newobj = TextBlock("test")
+    assert newobj.text == "test"
 
 
 def test_invalid_keyword_raises() -> None:
     with pytest.raises(KeyError, match="Invalid keyword arguement"):
-        TextBlock(invalid="Test")
+        TextBlock("", invalid="Test")

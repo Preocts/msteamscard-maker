@@ -68,7 +68,8 @@ class TextBlock(BaseElement):
     isVisible: bool | None = None
     fallback: str = "drop"
 
-    def __init__(self, **kwargs: str | int | bool | None) -> None:
+    def __init__(self, text: str, **kwargs: str | int | bool | None) -> None:
+        self.text = text
         for key, value in kwargs.items():
             if not hasattr(self, f"set_{key}"):
                 raise KeyError(f"Invalid keyword arguement: '{key}'")
