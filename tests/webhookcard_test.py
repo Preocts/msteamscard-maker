@@ -3,23 +3,31 @@ from pathlib import Path
 
 import pytest
 from cardmaker.model.constants import EMPTY_WEBHOOK_CARD
-from cardmaker.model.elements.factset import FactSet
-from cardmaker.model.elements.image import Image
-from cardmaker.model.elements.media import Media
-from cardmaker.model.elements.mention import Mention
-from cardmaker.model.elements.textblock import TextBlock
 from cardmaker.webhookcard import WebhookCard
 
 EXPECTED_TEST_CARD = json.load(Path("tests/fixtures/webhook_card.json").open())
-TEST_TEXTBLOCK = TextBlock(
-    text="<at>General Kenobi</at>",
-    weight="bolder",
-    size="large",
-)
-TEST_IMAGE = Image("https://127.0.0.1")
-TEST_MENTION = Mention("<at>General Kenobi</at>", "24601", "Obiwan")
-TEST_FACTSET = FactSet([("fact 1", "value 1"), ("fact 2", "value 2")])
-TEST_MEDIA = Media.basic_setup("video/mp4", "https://127.0.0.1", altText="Mock")
+TEST_TEXTBLOCK = {
+    "text": "<at>General Kenobi</at>",
+    "weight": "bolder",
+    "size": "large",
+}
+TEST_IMAGE = {
+    "url": "https://127.0.0.1",
+}
+TEST_MENTION = [
+    "<at>General Kenobi</at>",
+    "24601",
+    "Obiwan",
+]
+TEST_FACTSET = [
+    ("fact 1", "value 1"),
+    ("fact 2", "value 2"),
+]
+TEST_MEDIA = {
+    "mime_type": "video/mp4",
+    "media_url": "https://127.0.0.1",
+    "altText": "Mock",
+}
 
 
 @pytest.fixture
@@ -29,13 +37,13 @@ def hookcard() -> WebhookCard:
 
 # NOTE: As new componetes are added, include them in this test
 def test_card_creation(hookcard: WebhookCard) -> None:
-    hookcard.add_element(TEST_TEXTBLOCK)
-    hookcard.add_element(TEST_IMAGE)
-    hookcard.add_mention(TEST_MENTION)
-    hookcard.add_element(TEST_FACTSET)
-    hookcard.add_element(TEST_MEDIA)
+    hookcard.add_element(hookcard.new_textblock(**TEST_TEXTBLOCK))
+    hookcard.add_element(hookcard.new_image(**TEST_IMAGE))
+    hookcard.add_mention(hookcard.new_mention(*TEST_MENTION))
+    hookcard.add_element(hookcard.new_factset(TEST_FACTSET))
+    hookcard.add_element(hookcard.new_media.basic_setup(**TEST_MEDIA))
 
-    assert hookcard.render == json.dumps(EXPECTED_TEST_CARD)
+    assert hookcard.render() == json.dumps(EXPECTED_TEST_CARD)
 
 
 def test_empty_card_repr(hookcard: WebhookCard) -> None:
@@ -43,20 +51,15 @@ def test_empty_card_repr(hookcard: WebhookCard) -> None:
 
 
 def test_empty_card_render(hookcard: WebhookCard) -> None:
-    assert hookcard.render == json.dumps(EMPTY_WEBHOOK_CARD)
+    assert hookcard.render() == json.dumps(EMPTY_WEBHOOK_CARD)
 
 
-def test_add_textblock(hookcard: WebhookCard) -> None:
-    tblock = TextBlock(text="mocking test", wrap=True)
-
-    hookcard.add_element(tblock)
-
-    assert len(hookcard.body) == 1
-    assert hookcard.body[0].render == tblock.render
+def test_empty_card_asdict(hookcard: WebhookCard) -> None:
+    assert hookcard.asdict() == EMPTY_WEBHOOK_CARD
 
 
 def test_add_mention(hookcard: WebhookCard) -> None:
-    mention = Mention("mock", "123", "mock")
+    mention = hookcard.new_mention("mock", "123", "mock")
 
     hookcard.add_mention(mention)
 
