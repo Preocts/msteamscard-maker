@@ -34,18 +34,18 @@ class TextBlock(BaseElement):
 
     Keyword Arguments:
         text: [str] Text to display. A subset of markdown is supported
-        color: [str] Controls the color of TextBlock elements.
+        color: [str] Control the color of TextBlock elements
         fontType: [str] Type of font to use for rendering
-        horizontalAlignment: [str] Controls the horizontal text alignment
+        horizontalAlignment: [str] Control the horizontal text alignment
         isSubtle: [bool] If true displays text slightly toned down
         maxLines: [int] Specify the maximum number of lines to display
         size: [str] Control size of text
-        weight: [str] Controls the weight of TextBlock elements
+        weight: [str] Control the weight of TextBlock elements
         wrap: [bool] If true, allow text to wrap. Otherwise text is clipped
         style: [str] The style of this TextBlock for accessibility purposes
         height: [str] Specify the height of the element
         separator: [bool] When True, draw a sparating line at the top of the element
-        spacing: [str] Controls spacing between this element and the preceding element
+        spacing: [str] Control spacing between this element and the preceding element
         id: [str] A unique indentifier associated with the item
         isVisible: [bool] If False, this item will be removed from the visual tree
     """
@@ -81,7 +81,7 @@ class TextBlock(BaseElement):
 
     def set_color(self, color: T_COLORS | None) -> None:
         """
-        Controls the color of TextBlock elements.
+        Control the color of TextBlock elements
             `default`, `dark`, `light`, `accent`, `good`, `warning`, `attention`
         """
         if color is not None and color not in COLORS:
@@ -99,7 +99,7 @@ class TextBlock(BaseElement):
 
     def set_horizontalAlignment(self, alignment: T_HORIZONTALALIGNMENT | None) -> None:
         """
-        Controls the horizontal text alignment. Default `left` or from parent container
+        Control the horizontal text alignment. Default `left` or from parent container
             `left`, `center`, `right`
         """
         if alignment is not None and alignment not in HORIZONTALALIGNMENT:
@@ -127,7 +127,7 @@ class TextBlock(BaseElement):
 
     def set_weight(self, weight: T_WEIGHT | None) -> None:
         """
-        Controls the weight of TextBlock elements
+        Control the weight of TextBlock elements
             `default`, `lighter`, `bolder`
         """
         if weight is not None and weight not in WEIGHT:
@@ -162,7 +162,7 @@ class TextBlock(BaseElement):
 
     def set_spacing(self, spacing: T_SPACING | None) -> None:
         """
-        Controls the amount of spacing between this element and the preceding element
+        Control the amount of spacing between this element and the preceding element
             'default', 'none', 'small', 'medium', 'large', 'extraLarge', 'padding'
         """
         if spacing is not None and spacing not in SPACING:
