@@ -3,6 +3,7 @@ from __future__ import annotations
 from unittest.mock import patch
 
 import pytest
+from cardmaker.model.constants import T_HORIZONTALALIGNMENT
 from cardmaker.model.elements.richtextblock import RichTextBlock
 from cardmaker.model.elements.textrun import TextRun
 
@@ -52,9 +53,9 @@ def test_add_line_from_helper_attr(rtb: RichTextBlock) -> None:
 )
 def test_set_horizontal_alignment(
     rtb: RichTextBlock,
-    value: str | None,
+    value: T_HORIZONTALALIGNMENT | None,
     expected: str | None,
 ) -> None:
-    rtb.set_horizontalAlignment(value)  # type: ignore
+    rtb.set_horizontalAlignment(value)
 
     assert rtb.horizontalAlignment == expected
