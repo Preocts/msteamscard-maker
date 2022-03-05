@@ -41,6 +41,16 @@
                             }
                         ],
                         "altText": "Mock"
+                    },
+                    {
+                        "type": "RichTextBlock",
+                        "inlines": [
+                            {
+                                "type": "TextRun",
+                                "text": "mock",
+                                "italic": true
+                            }
+                        ]
                     }
                 ],
                 "actions": [],

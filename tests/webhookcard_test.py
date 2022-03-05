@@ -1,5 +1,8 @@
+from __future__ import annotations
+
 import json
 from pathlib import Path
+from typing import Any
 
 import pytest
 from cardmaker.model.constants import EMPTY_WEBHOOK_CARD
@@ -28,6 +31,10 @@ TEST_MEDIA = {
     "media_url": "https://127.0.0.1",
     "altText": "Mock",
 }
+TEST_TEXTRUN: dict[str, Any] = {
+    "text": "mock",
+    "italic": True,
+}
 
 
 @pytest.fixture
@@ -42,7 +49,9 @@ def test_card_creation(hookcard: WebhookCard) -> None:
     hookcard.add_mention(hookcard.new_mention(*TEST_MENTION))
     hookcard.add_element(hookcard.new_factset(TEST_FACTSET))
     hookcard.add_element(hookcard.new_media.basic_setup(**TEST_MEDIA))
-
+    rtb = hookcard.new_richtextblock()
+    rtb.add_textrun(hookcard.new_textrun(**TEST_TEXTRUN))
+    hookcard.add_element(rtb)
     assert hookcard.render() == json.dumps(EXPECTED_TEST_CARD)
 
 

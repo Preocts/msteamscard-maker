@@ -9,9 +9,17 @@ from cardmaker.model.elements.factset import FactSet
 from cardmaker.model.elements.image import Image
 from cardmaker.model.elements.media import Media
 from cardmaker.model.elements.mention import Mention
+from cardmaker.model.elements.richtextblock import RichTextBlock
 from cardmaker.model.elements.textblock import TextBlock
+from cardmaker.model.elements.textrun import TextRun
 
-T_ELEMENTS = Union[TextBlock, FactSet, Image, Media]
+T_ELEMENTS = Union[
+    TextBlock,
+    FactSet,
+    Image,
+    Media,
+    RichTextBlock,
+]
 T_ENTITIES = Mention
 
 
@@ -22,6 +30,8 @@ class WebhookCard:
     new_media = Media
     new_factset = FactSet
     new_mention = Mention
+    new_richtextblock = RichTextBlock
+    new_textrun = TextRun
 
     def __init__(self) -> None:
         self._empty_card = json.dumps(EMPTY_WEBHOOK_CARD)
