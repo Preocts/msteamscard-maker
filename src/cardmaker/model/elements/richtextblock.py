@@ -21,7 +21,7 @@ class RichTextBlock(BaseElement):
         self_dict["inlines"] = [tr.asdict() for tr in self.inlines]
         return self_dict
 
-    def add_inline(self, textrun: TextRun) -> None:
+    def add_textrun(self, textrun: TextRun) -> None:
         """Add a textrun to the element. Will appear in order added"""
         self.inlines.append(textrun)
 
