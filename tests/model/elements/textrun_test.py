@@ -14,6 +14,10 @@ def test_init_setup(textrun: TextRun) -> None:
     assert textrun.text == "mock"
 
 
+def test_empty_asdict(textrun: TextRun) -> None:
+    assert textrun.asdict() == {"type": "TextRun", "text": "mock"}
+
+
 @pytest.mark.parametrize(
     ("attr", "value", "expected"),
     (

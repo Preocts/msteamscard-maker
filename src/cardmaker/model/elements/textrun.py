@@ -13,7 +13,7 @@ from cardmaker.model.constants import T_WEIGHT
 from cardmaker.model.constants import WEIGHT
 
 
-@dataclasses.dataclass
+@dataclasses.dataclass(repr=False)
 class TextRun(BaseElement):
     """
     Defines a TextRun element
