@@ -62,5 +62,15 @@ class WebhookCard:
         self.body.append(element)
 
     def add_mention(self, mention: Mention) -> None:
-        """Include a mention in the card. Does not check if `text` is referenced."""
+        """Include a mention in the card."""
+        is_referenced = False
+        for element in self.body:
+            if hasattr(element, "text") and mention.text in element.text:  # type: ignore # noqa: E501
+                is_referenced = True
+                break
+        if not is_referenced:
+            raise ValueError(
+                f"Mention text '{mention.text}' referenced before defined in "
+                "an element. Elements containing the mention text must be added first."
+            )
         self.entities.append(mention)
