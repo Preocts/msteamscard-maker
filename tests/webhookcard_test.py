@@ -67,8 +67,22 @@ def test_empty_card_asdict(hookcard: WebhookCard) -> None:
     assert hookcard.asdict() == EMPTY_WEBHOOK_CARD
 
 
-def test_add_mention(hookcard: WebhookCard) -> None:
-    mention = hookcard.new_mention("mock", "123", "mock")
+def test_raise_on_mention_with_no_matching_text(hookcard: WebhookCard) -> None:
+    hookcard.add_element(hookcard.new_image(**TEST_IMAGE))
+    hookcard.add_element(hookcard.new_textblock(**TEST_TEXTBLOCK))
+    mention = hookcard.new_mention("<at>Bob</at>", "123", "mock")
+
+    with pytest.raises(ValueError):
+        hookcard.add_mention(mention)
+
+    assert True
+
+
+def test_no_raise_on_mention_with_matching_text(hookcard: WebhookCard) -> None:
+    hookcard.add_element(hookcard.new_image(**TEST_IMAGE))
+    hookcard.add_element(hookcard.new_textblock(**TEST_TEXTBLOCK))
+    hookcard.add_element(hookcard.new_textblock("Hi, <at>Bob</at>"))
+    mention = hookcard.new_mention("<at>Bob</at>", "123", "mock")
 
     hookcard.add_mention(mention)
 
