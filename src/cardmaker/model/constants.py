@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Literal
 
 EMPTY_WEBHOOK_CARD = {
@@ -7,11 +9,12 @@ EMPTY_WEBHOOK_CARD = {
             "contentType": "application/vnd.microsoft.card.adaptive",
             "content": {
                 "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-                "version": "1.0",
+                "version": "1.2",
                 "type": "AdaptiveCard",
                 "body": [],
                 "actions": [],
                 "msteams": {
+                    "width": "Full",
                     "entities": [],
                 },
             },

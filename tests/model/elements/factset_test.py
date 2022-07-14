@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 
 from cardmaker.model.elements.factset import FactSet

@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from cardmaker.model.elements.mention import Mention
 
 TEST_DATA = {

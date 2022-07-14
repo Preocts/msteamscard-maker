@@ -39,7 +39,7 @@ class TextRun(BaseElement):
         weight: [str] Control the weight of TextBlock elements
     """
 
-    type: str = "TextRun"
+    type: str = "TextRun"  # noqa: A003
     text: str = ""
     color: str | None = None
     fontType: str | None = None

@@ -15,7 +15,7 @@ from cardmaker.model.constants import T_SIZE
 
 @dataclasses.dataclass(init=False, repr=False)
 class Image(BaseElement):
-    type: str = "Image"
+    type: str = "Image"  # noqa: A003
     url: str = ""
     altText: str | None = None
     backgroundColor: str | None = None

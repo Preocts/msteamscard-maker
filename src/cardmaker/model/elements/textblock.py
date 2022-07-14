@@ -50,7 +50,7 @@ class TextBlock(BaseElement):
         isVisible: [bool] If False, this item will be removed from the visual tree
     """
 
-    type: str = "TextBlock"
+    type: str = "TextBlock"  # noqa: A003
     text: str = ""
     color: str | None = None
     fontType: str | None = None
@@ -64,7 +64,7 @@ class TextBlock(BaseElement):
     height: str | None = None
     separator: bool | None = None
     spacing: str | None = None
-    id: str | None = None
+    id: str | None = None  # noqa: A003
     isVisible: bool | None = None
     fallback: str = "drop"
 

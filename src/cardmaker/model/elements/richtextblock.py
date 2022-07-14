@@ -11,7 +11,7 @@ from cardmaker.model.elements.textrun import TextRun
 
 @dataclasses.dataclass(repr=False)
 class RichTextBlock(BaseElement):
-    type: str = "RichTextBlock"
+    type: str = "RichTextBlock"  # noqa: A003
     inlines: list[TextRun] = dataclasses.field(default_factory=list)
     horizontalAlignment: T_HORIZONTALALIGNMENT | None = None
     new_textrun = TextRun
