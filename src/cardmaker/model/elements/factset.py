@@ -13,7 +13,7 @@ class _Fact(TypedDict):
 
 @dataclasses.dataclass(init=False, repr=False)
 class FactSet(BaseElement):
-    type: str = "FactSet"
+    type: str = "FactSet"  # noqa: A003
     facts: list[_Fact] = dataclasses.field(default_factory=list)
 
     def __init__(self, facts_: list[tuple[str, str]] | None = None) -> None:

@@ -24,9 +24,9 @@ class Mention(BaseElement):
     """
 
     text: str
-    id: str
+    id: str  # noqa: A003
     name: str
-    type: str = "mention"
+    type: str = "mention"  # noqa: A003
 
     def asdict(self) -> dict[str, Any]:
         """Render object as dict."""

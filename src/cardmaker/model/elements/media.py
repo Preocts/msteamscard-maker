@@ -20,7 +20,7 @@ class Media(BaseElement):
     multiple media sources are added with `.add_source()`
     """
 
-    type: str = "Media"
+    type: str = "Media"  # noqa: A003
     sources: list[MediaSource] = dataclasses.field(default_factory=list)
     poster: str | None = None
     altText: str | None = None
