@@ -25,8 +25,8 @@ projects. Leveraging a `venv` will ensure the installed dependency files will
 not impact other python projects or any system dependencies.
 
 The following steps outline how to install this repo for local development. See
-the [CONTRIBUTING.md](../CONTRIBUTING.md) file in the repo root for information
-on contributing to the repo.
+the [CONTRIBUTING.md](CONTRIBUTING.md) file in the repo root for information on
+contributing to the repo.
 
 **Windows users**: Depending on your python install you will use `py` in place
 of `python` to create the `venv`.
@@ -44,25 +44,25 @@ the desired version while creating the `venv`. (e.g. `python3` or `python3.8`)
 
 Clone this repo and enter root directory of repo:
 
-```bash
-git clone https://github.com/Preocts/msteamcard-maker
-cd msteamcard-maker
+```console
+$ git clone https://github.com/{{ORG_NAME}}/{{REPO_NAME}}
+$ cd {{REPO_NAME}}
 ```
 
 Create the `venv`:
 
-```bash
-python -m venv venv
+```console
+$ python -m venv venv
 ```
 
 Activate the `venv`:
 
-```bash
+```console
 # Linux/Mac
-. venv/bin/activate
+$ . venv/bin/activate
 
 # Windows
-venv\Scripts\activate
+$ venv\Scripts\activate
 ```
 
 The command prompt should now have a `(venv)` prefix on it. `python` will now
@@ -70,21 +70,18 @@ call the version of the interpreter used to create the `venv`
 
 Install editable library and development requirements:
 
-```bash
+```console
 # Update pip and tools
-python -m pip install --upgrade pip wheel setuptools
-
-# Install development requirements
-python -m pip install -r requirements-dev.txt
+$ python -m pip install --upgrade pip
 
 # Install editable version of library
-python -m pip install --editable .
+$ python -m pip install --editable .[dev]
 ```
 
 Install pre-commit [(see below for details)](#pre-commit):
 
-```bash
-pre-commit install
+```console
+$ pre-commit install
 ```
 
 ---
@@ -93,20 +90,42 @@ pre-commit install
 
 Run pre-commit on all files:
 
-```bash
-pre-commit run --all-files
+```console
+$ pre-commit run --all-files
 ```
 
 Run tests:
 
-```bash
-tox
+```console
+$ tox [-r] [-e py3x]
+```
+
+Build dist:
+
+```console
+$ python -m pip install --upgrade build
+
+$ python -m build
 ```
 
 To deactivate (exit) the `venv`:
 
-```bash
-deactivate
+```console
+$ deactivate
+```
+---
+
+## Note on flake8:
+
+`flake8` is included in the `requirements-dev.txt` of the project. However it
+disagrees with `black`, the formatter of choice, on max-line-length and two
+general linting errors. `.pre-commit-config.yaml` is already configured to
+ignore these. `flake8` doesn't support `pyproject.toml` so be sure to add the
+following to the editor of choice as needed.
+
+```ini
+--ignore=W503,E203
+--max-line-length=88
 ```
 
 ---
@@ -128,13 +147,14 @@ This repo has a Makefile with some quality of life scripts if the system
 supports `make`.  Please note there are no checks for an active `venv` in the
 Makefile.
 
-| PHONY             | Description                                                        |
-| ----------------- | ------------------------------------------------------------------ |
-| `init`            | Update pip, setuptools, and wheel to newest version                |
-| `dev-install`     | install development requirements and project                       |
-| `update`          | Run any update scripts for requirements                            |
-| `build-dist`      | Build source distribution and wheel distribution                   |
-| `clean-artifacts` | Deletes python/mypy artifacts including eggs, cache, and pyc files |
-| `clean-tests`     | Deletes tox, coverage, and pytest artifacts                        |
-| `clean-build`     | Deletes build artifacts                                            |
-| `clean-all`       | Runs all clean scripts                                             |
+| PHONY             | Description                                                           |
+| ----------------- | --------------------------------------------------------------------- |
+| `init`            | Update pip to newest version                                          |
+| `install`         | install the project                                                   |
+| `install-test`    | install test requirements and project as editable install             |
+| `install-dev`     | install development/test requirements and project as editable install |
+| `build-dist`      | Build source distribution and wheel distribution                      |
+| `clean-artifacts` | Deletes python/mypy artifacts, cache, and pyc files                   |
+| `clean-tests`     | Deletes tox, coverage, and pytest artifacts                           |
+| `clean-build`     | Deletes build artifacts                                               |
+| `clean-all`       | Runs all clean scripts                                                |
