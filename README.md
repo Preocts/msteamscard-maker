@@ -5,7 +5,6 @@ black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://gith
 status](https://results.pre-commit.ci/badge/github/Preocts/msteamscard-maker/main.svg)](https://results.pre-commit.ci/latest/github/Preocts/msteamscard-maker/main)
 [![Python
 package](https://github.com/Preocts/msteamscard-maker/actions/workflows/python-tests.yml/badge.svg?branch=main)](https://github.com/Preocts/msteamscard-maker/actions/workflows/python-tests.yml)
-[![codecov](https://codecov.io/gh/Preocts/msteamscard-maker/branch/main/graph/badge.svg?token=ZHZ37V8IHK)](https://codecov.io/gh/Preocts/msteamscard-maker)
 
 # msteamscard-maker
 
